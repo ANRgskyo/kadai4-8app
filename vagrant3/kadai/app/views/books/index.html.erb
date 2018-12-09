@@ -1,0 +1,40 @@
+<% if flash[:delete] %>
+   <div class="flash">
+    <%= flash[:delete] %>
+   </div>
+<% end %>
+
+<div class="bookmain">
+<h1>Books</h1>
+<table>
+  <tr>
+  	<th>Title</th>
+  	<th>Body</th>
+  </tr>
+  <% @books.each do |book| %>
+  <tr>
+    <td><%= book.title %></td>
+    <td><%= book.body %></td>
+    <td><%= link_to "Show", book_path(book.id), class: "show_#{book.id}" %></td>
+    <td><%= link_to "Edit", edit_book_path(book.id), class: "edit_#{book.id}" %></td>
+    <td><%= link_to "Destroy", destroy_book_path(book.id), class: "destroy_#{book.id}", method: :delete, "data-confirm" => "Are you Sure?" %></td>
+  </tr>
+  <% end %>
+</table>
+</div>
+
+
+<div class="newbook">
+<h1>New Book</h1>
+
+<%= form_for(@book) do |f| %>
+
+    <h4>Title</h4>
+    <%= f.text_field :title, class: "book_title" %>
+
+    <h4>Body</h4>
+    <%= f.text_area :body, class: "book_body" %>
+    
+    <div><%= f.submit 'Create Book' %></div>
+<% end %>
+</div>
